@@ -4,7 +4,7 @@ class Train
 
   alias_method :current_speed, :speed
 
-  def initialize(number, speed = 0, wagons_qty=0, train_type)
+  def initialize(number, speed = 0, wagons_qty = 0, train_type)
     @number = number
     @speed = speed
     @train_type = train_type
@@ -38,7 +38,7 @@ class Train
   end
 
   def set_route(route)
-    @current_route == route
+    @current_route = route
     @point = 0
     current_station.recieve_train self
   end
