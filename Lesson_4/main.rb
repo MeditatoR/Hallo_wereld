@@ -29,38 +29,42 @@ class Main
   def create_train
     puts 'Введите номер поезда:'
     number = gets.chomp
-    puts 'Введите тип поезда (пассажирский/грузовой)'
-    type = gets.chomp
-    trains << PassengerTrain.new(number) if type == 'пассажирский'
-    trains << CargoTrain.new(number) if type == 'грузовой'
+    puts 'Выберите тип поезда:
+    1. - Пассажирский
+    2. - Грузовой'
+    type = gets.chomp.to_i
+    case type
+      when 1 then trains << PassengerTrain.new(number)
+      when 2 then trains << CargoTrain.new(number)
+    end
   end
 
 
   def train_select
     puts 'Доступные поезда:'
-    @trains.each { |train| puts "#{train.number}, #{train.train_type}" }
-    puts 'Укажите номер поезда'
-    selected_train = gets.chomp
-    @trains.select {|train| train.number == selected_train}.first
+    trains.each_with_index {|k, v| puts "Номер #{k.number} => Поезд #{v += 1}" }
+    puts 'Выберите номер поезда'
+    index = gets.chomp.to_i
+    @trains[index -= 1]
   end
 
 
   def station_select
-    puts 'Доступные станции'
-    @stations.each {|station| puts "#{station.name}"}
+    puts 'Доступные станции:'
+    @stations.each_with_index {|k, v| puts "#{k.name} => Станция #{v += 1}" }
     puts 'Укажите станцию '
-    selected_station = gets.chomp
-    @stations.select {|station| station.name == selected_station}.first
+    index = gets.chomp.to_i
+    @stations[index -= 1]
   end
 
 
   def station_info
     puts 'Доступные станции'
-    @stations.each {|station| puts "#{station.name}"}
-    puts 'Укажите станцию '
-    selected_station = gets.chomp
-    puts "Доступные поезда на станции #{selected_station}"
-    b = stations.select {|station| station.name == selected_station}.first
+    @stations.each_with_index {|k, v| puts " #{k.name} => Станция #{v += 1}" }
+    puts 'Введите номер станции'
+    selected_station = gets.chomp.to_i
+    puts "Доступные поезда на станции #{@stations[selected_station]}"
+    b = @stations[selected_station -= 1]
     b.print_train_list
   end
 
@@ -70,7 +74,6 @@ class Main
     wagon = PassengerWagon.new if train.class == PassengerTrain
     wagon = CargoWagon.new if train.class == CargoTrain
     train.attach_wagon(wagon)
-    puts "Вагон добавлен, количество вагонов - #{train.wagons_qty}"
   end
 
 
@@ -125,10 +128,11 @@ class Main
 
 
   def route_select
+    puts 'Доступные маршруты:'
+    @routes.each_with_index {|k, v| puts "#{k.route_name} => Маршрут #{v += 1}" }
     puts 'Выберите маршрут:'
-    @routes.each { |route| puts "#{route.route_name}" }
-    selected_route = gets.chomp
-    @routes.select { |route| route.route_name == selected_route }.first
+    selected_route = gets.chomp.to_i
+    @routes[selected_route -= 1]
   end
 
 

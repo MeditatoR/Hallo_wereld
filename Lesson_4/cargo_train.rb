@@ -1,5 +1,4 @@
 class CargoTrain < Train
- attr_reader :train_type
 
   def initialize(train_name)
     super

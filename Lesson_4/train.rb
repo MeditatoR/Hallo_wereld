@@ -11,14 +11,14 @@ class Train
     @speed = 0
     @train_type = train_type
     @wagons = []
-    @wagons_qty = 0
   end
 
+
   def gain_speed(how_mutch)
-    how_mutch = how_mutch
     return 'Скорость не может быть < 0' if how_mutch < 0
     @speed += how_mutch
   end
+
 
   def brake
     @speed = 0
@@ -26,23 +26,32 @@ class Train
 
 
   def attach_wagon(wagon)
-    if @speed == 0 && wagon.wagon_type == train_type
-       @wagons_qty +=1
-       @wagons << wagon
-    else
-      puts 'Поезд движется, ошибка!'
-    end
+    if @speed.zero?
+      if wagon.wagon_type == train_type
+        @wagons << wagon
+        puts "Вагон прицеплен. Количество вагонов #{@wagons.count}"
+      else
+        puts 'Тип вагона не совпадает с типом поезда'
+      end
+      else
+        puts 'Поезд движется, ошибка!'
+      end
   end
 
 
   def detach_wagon
-    if @speed == 0 && @wagons_qty > 0 && !@wagons.empty?
-       @wagons_qty -=1
-       @wagons.delete_at(-1)
-    else
-      puts 'Поезд движется, ошибка!'
-    end
+    if @speed.zero?
+      if !@wagons.empty?
+        @wagons.delete_at(-1)
+        puts "Вагон отцеплен Количество вагонов #{@wagons.count}"
+      else
+        puts 'Нет прицепленных вагонов'
+      end
+      else
+        puts 'Поезд движется, ошибка!'
+      end
   end
+
 
   def set_route(route)
     @current_route = route
