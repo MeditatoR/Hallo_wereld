@@ -45,7 +45,10 @@ class Main
     trains.each_with_index {|k, v| puts "Номер #{k.number} => Поезд #{v += 1}" }
     puts 'Выберите номер поезда'
     index = gets.chomp.to_i
+    if index > @stations.count then puts 'Такой станции не существует'
+    else
     @trains[index -= 1]
+    end
   end
 
 
@@ -54,7 +57,10 @@ class Main
     @stations.each_with_index {|k, v| puts "#{k.name} => Станция #{v += 1}" }
     puts 'Укажите станцию '
     index = gets.chomp.to_i
+    if index > @stations.count then puts 'Такой станции не существует'
+    else
     @stations[index -= 1]
+    end
   end
 
 
@@ -71,6 +77,7 @@ class Main
 
   def add_wagon
     train = train_select
+    return puts 'Ошибка, введены несуществующие данные' if train.nil?
     wagon = PassengerWagon.new if train.class == PassengerTrain
     wagon = CargoWagon.new if train.class == CargoTrain
     train.attach_wagon(wagon)
@@ -79,6 +86,7 @@ class Main
 
   def remove_wagon
     train = train_select
+    return puts 'Ошибка, введены несуществующие данные' if train.nil?
     train.detach_wagon
   end
 
@@ -123,6 +131,7 @@ class Main
     start = station_select
     puts 'Конечная станция:'
     finish = station_select
+    return puts 'Введена несуществующая станция' if start.nil? || finish.nil?
     @routes << Route.new(start, finish)
   end
 
@@ -138,6 +147,7 @@ class Main
 
   def movement_menu
     train = train_select
+    return puts 'Ошибка, введены несуществующие данные' if train.nil?
     puts 'Выберете направление движения поезда
     1. - Вперёд
     2. - Назад
@@ -156,6 +166,7 @@ class Main
   def add_route_to_train
     route = route_select
     train = train_select
+    return puts 'Ошибка, введены несуществующие данные' if train.nil? || route.nil?
     train.set_route(route)
   end
 
