@@ -14,7 +14,6 @@ class Station
   end
 
   def self.all
-    puts 'Станции, созданные на данный момент:'
     @@stations.each { |s| puts "#{s.name}" }
   end
 
@@ -27,11 +26,10 @@ class Station
   end
 
   def print_train_type(train_type)
-    puts "Поездов типа #{train_type} на станции - #{@trains.select { |train| train.train_type == train_type}.size}"
+    @trains.select { |train| train.train_type == train_type}.size
   end
 
   def send_train(train)
     @trains.delete(train)
   end
-
 end

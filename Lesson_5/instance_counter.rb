@@ -15,7 +15,7 @@ module InstanceCounter
     end
 
     def instances
-      puts "Экземпляров данного класса - #{self.i_counter}"
+      self.i_counter
     end
   end
 

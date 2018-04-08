@@ -10,20 +10,20 @@ class Train
 
   alias_method :current_speed, :speed
 
-  @@trains = []
+  @@trains = {}
 
   def initialize(number)
     @number = number
     @speed = 0
     @train_type = train_type
     @wagons = []
-    @@trains << self
+    @@trains[number] = self
     register_instance
   end
 
 
   def self.find(number)
-     @@trains.select {|train| train.number == number}.first
+    puts "Поезд #{@@trains[number]} "
   end
 
 
