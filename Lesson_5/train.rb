@@ -23,7 +23,7 @@ class Train
 
 
   def self.find(number)
-    puts "Поезд #{@@trains[number]} "
+    @@trains[number]
   end
 
 
