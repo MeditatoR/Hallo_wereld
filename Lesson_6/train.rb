@@ -20,10 +20,10 @@ TRAIN_NUMBER_FORMAT = /^[а-яА-я0-9]{3}-?[а-яА-Я0-9]{2}$/
 
   def initialize(number)
     @number = number
+    validate!
     @speed = 0
     @train_type = train_type
     @wagons = []
-    validate!
     @@trains[number] = self
     register_instance
   end

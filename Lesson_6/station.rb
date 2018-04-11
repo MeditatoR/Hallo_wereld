@@ -35,7 +35,7 @@ class Station
   end
 
 
-protected
+private
   def validate!
     raise 'Введите название станции' if number.nil?
     true
