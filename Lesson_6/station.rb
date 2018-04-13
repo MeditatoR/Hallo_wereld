@@ -37,7 +37,7 @@ class Station
 
 private
   def validate!
-    raise 'Введите название станции' if number.nil?
+    raise 'Введите название станции' if @name.nil?
     true
   end
 end
