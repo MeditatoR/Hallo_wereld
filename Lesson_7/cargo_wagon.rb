@@ -1,5 +1,5 @@
 class CargoWagon < Wagon
-attr_reader :wagon_type
+  attr_reader :wagon_type
   attr_accessor :volume, :volume_b
 
   def initialize
@@ -12,7 +12,7 @@ attr_reader :wagon_type
   end
 
   def take_volume
-    unless @volume_f >= 1
+    if @volume_f >= 1
       puts 'Нет свободного объёма'
     else
       @volue_f -= 1

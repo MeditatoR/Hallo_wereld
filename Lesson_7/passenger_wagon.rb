@@ -12,7 +12,7 @@ class PassengerWagon < Wagon
   end
 
   def take_seat
-    unless @seats_f >= 1
+    if @seats_f >= 1
       puts 'Свободных мест нет'
     else
       @seats_f -= 1
