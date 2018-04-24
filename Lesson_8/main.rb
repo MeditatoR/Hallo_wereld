@@ -91,33 +91,27 @@ class Main
 
   def train_select
     puts 'Доступные поезда:'
-    trains.each_with_index { |k, v| puts "Номер #{k.number} => Поезд #{v += 1}" }
+    trains.each.with_index(1) { |k, v| puts "Номер #{k.number} => Поезд #{v}" }
     puts 'Выберите номер поезда'
     index = gets.chomp.to_i
-    if index > @trains.count then puts 'Такого поезда не существует'
-    else
-      @trains[index -= 1]
-    end
+    index > @trains.count ? (puts 'Такого поезда не существует') : @trains[index - 1]
   end
 
   def station_select
     puts 'Доступные станции:'
-    @stations.each_with_index { |k, v| puts "#{k.name} => Станция #{v += 1}" }
+    @stations.each.with_index(1) { |k, v| puts "#{k.name} => Станция #{v}" }
     puts 'Укажите станцию '
     index = gets.chomp.to_i
-    if index > @stations.count then puts 'Такой станции не существует'
-    else
-      @stations[index -= 1]
-    end
+    index > @stations.count ? (puts 'Такой станции не существует') : @trains[index - 1]
   end
 
   def station_info
     puts 'Доступные станции'
-    @stations.each_with_index { |k, v| puts " #{k.name} => Станция #{v += 1}" }
+    @stations.each.with_index(1) { |k, v| puts " #{k.name} => Станция #{v}" }
     puts 'Введите номер станции'
     selected_station = gets.chomp.to_i
     puts "Доступные поезда на станции #{@stations[selected_station]}"
-    b = @stations[selected_station -= 1]
+    b = @stations[selected_station - 1]
     b.print_train_list
   end
 
@@ -159,17 +153,12 @@ class Main
     end
   end
 
-  # puts "Количество вагонов в поезде #{train.number}: #{train.wagons.size}"
-
   def wagon_select
     puts 'Доступные вагоны:'
-    @wagons.each_with_index { |k, v| puts "#{k.wagon_type} вагон => № #{v += 1}" }
+    @wagons.each.with_index(1) { |k, v| puts "#{k.wagon_type} вагон => № #{v}" }
     puts 'Выберите вагон:'
     selected_wagon = gets.chomp.to_i
-    if selected_wagon < 1 then puts 'Выбран несуществующий вагон'
-    else
-      @wagons[selected_wagon -= 1]
-    end
+    selected_wagon < 1 ? (puts 'Выбран несуществующий вагон') : @wagons[selected_wagon - 1]
   end
 
   def wagon_list
@@ -229,10 +218,10 @@ class Main
 
   def route_select
     puts 'Доступные маршруты:'
-    @routes.each_with_index { |k, v| puts "#{k.route_name} => Маршрут #{v += 1}" }
+    @routes.each.with_index(1) { |k, v| puts "#{k.route_name} => Маршрут #{v}" }
     puts 'Выберите маршрут:'
     selected_route = gets.chomp.to_i
-    @routes[selected_route -= 1]
+    @routes[selected_route - 1]
   end
 
   def movement_menu
@@ -256,7 +245,7 @@ class Main
     route = route_select
     train = train_select
     return puts 'Ошибка, введены несуществующие данные' if train.nil? || route.nil?
-    train.set_route(route)
+    train.get_route(route)
   end
 
   puts "\e[31m MAIN RB!\e[0m"

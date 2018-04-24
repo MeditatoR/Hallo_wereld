@@ -69,7 +69,7 @@ class Train
     end
   end
 
-  def set_route(route)
+  def get_route(route)
     @current_route = route
     @point = 0
     current_station.recieve_train self
